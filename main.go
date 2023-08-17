@@ -1,7 +1,12 @@
 package main
 
 import (
+	"database/sql"
+	"fmt"
 	"image/color"
+	"log"
+
+	_ "github.com/mattn/go-sqlite3"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
@@ -12,6 +17,14 @@ import (
 )
 
 func main() {
+
+	db, err := sql.Open("sqlite3", "./todo.db")
+	if err != nil {
+		log.Println("error when opening sqlite3 database", err)
+	}
+
+	fmt.Printf("db %v\n", db)
+
 	a := app.New()
 	w := a.NewWindow("Todo App")
 
